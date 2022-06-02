@@ -1,0 +1,12 @@
+# directories to ignore
+.vscode/
+build/
+
+# input and output is ignore for space
+input/
+output/
+
+# files to ignore
+*.obj
+*.bin
+*/dimensions.txt
