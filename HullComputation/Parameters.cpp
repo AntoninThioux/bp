@@ -44,7 +44,7 @@ void Parameters::parseFile(string filepath){
     ss << line;
     ss >> duration;
 
-    datafiles = (string *) malloc(sizeof(string) * duration);
+    datafiles = new string[duration];
     string path = filepath.substr(0, filepath.rfind('/') + 1);
     for (int i = 0; i < duration; i++) {
         getline(file, line);
@@ -73,6 +73,8 @@ void Parameters::parseOptions(int n, char **options) {
         else if (flag == "-kt" || flag == "--kernel-t-size") sscanf(options[++i], "%d", &kt);
         else if (flag == "-ea" || flag == "--export-animation") exportAnimation = 1;
         else if (flag == "-s" || flag == "--special") sscanf(options[++i], "%d", &special);
+        else if (flag == "-x") sscanf(options[++i], "%d", &x);
+        else if (flag == "-y") sscanf(options[++i], "%d", &y);
         else printError("Unknown flag!");
     }
 }
@@ -167,5 +169,5 @@ kx(DEFAULT_KERNEL_SIZE_X),ky(DEFAULT_KERNEL_SIZE_Y),kz(DEFAULT_KERNEL_SIZE_Z),kt
  */
 Parameters::~Parameters(){
     file.close();
-    free(datafiles);
+    delete [] datafiles;
 }

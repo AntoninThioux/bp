@@ -22,7 +22,19 @@ add_executable(compute HullComputation/main.cpp
         HullComputation/Writer.cpp
 )
 
-target_link_libraries(compute ArrayFire::afcpu)
+target_link_libraries(compute ArrayFire::afopencl)
+
+add_executable(computeCPU HullComputation/main.cpp
+        HullComputation/Parameters.cpp
+        HullComputation/Timer.cpp
+        HullComputation/Reader.cpp
+        HullComputation/Viewer.cpp
+        HullComputation/Calc.cpp
+        HullComputation/Writer.cpp
+)
+
+target_link_libraries(computeCPU ArrayFire::afcpu)
+
 
 add_executable(render HullRendering/main.cpp
         HullRendering/Render.cpp

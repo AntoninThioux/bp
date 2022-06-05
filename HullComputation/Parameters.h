@@ -32,6 +32,7 @@ namespace HullComputation{
         int kx, ky, kz, kt, threshold, special;
         int width, height, depth, duration, is4D;
         int exportAnimation;
+        int x, y;
         std::string *datafiles;
     };
 }

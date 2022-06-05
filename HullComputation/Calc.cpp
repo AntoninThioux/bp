@@ -96,7 +96,7 @@ void Calc::flattenAndReduce(array spacetime){
     // perform time labelling
     for (int i = 0; i < n; i++) {
         array slice = spacetime(i, span, span, span);
-        slice(slice > 1) = i + t;
+        slice(slice > 1) = i + t + params->y;
         spacetime(i, span, span, span) = slice;
     }
     
@@ -115,6 +115,11 @@ void Calc::flattenAndReduce(array spacetime){
  * @param params The Parameters object.
  */
 Calc::Calc(Parameters *params):params(params),t(1){
+    if (params->y != 0){
+        hulls = readArray("hulls.af", "hulls");
+        return ;
+    }
+
     // Indentity hull matrix 3D & 4D cases
     if (params->is4D)
         hulls = constant(0, params->depth - params->kz + 1, params->height - params->ky + 1, params->width - params->kx + 1, dtype::f32);
@@ -173,7 +178,8 @@ void Calc::processBatch(array batch){
  * @return array The hulls as an arrayfire array.
  */
 array Calc::getHulls(){
+    af::saveArray("hulls", hulls, "hulls.af");
     if (params->is4D)
-        return hulls  / (params->duration - params->kt + 1) * 0xFF;
-    return reorder(hulls, 1, 2, 0)  / (params->duration - params->kt + 1) * 0xFF;
+        return hulls  / (params->x - params->kt + 1) * 0xFF;
+    return reorder(hulls, 1, 2, 0)  / (params->x - params->kt + 1) * 0xFF;
 }
