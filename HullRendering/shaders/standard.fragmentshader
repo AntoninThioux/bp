@@ -6,7 +6,7 @@ in vec3 normal_cameraspace;
 in vec3 eyeDirection_cameraspace;
 in vec3 lightDirection_cameraspace;
 
-out vec4 color;
+out vec3 color;
 
 void main() {
 	vec3 lightColor = vec3(1,1,1);
@@ -44,5 +44,5 @@ void main() {
 	vec3 fragmentColor = materialAmbientColor + 
 			materialDiffuseColor * lightColor * lightPower * cosTheta / (distance*distance) +
 			materialSpecularColor * lightColor * lightPower * pow(cosAlpha,5) / (distance*distance);
-	color = vec4(fragmentColor, 1.0);
+	color = fragmentColor;
 }

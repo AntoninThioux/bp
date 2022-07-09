@@ -121,13 +121,11 @@ void Render::printRenderTime(double time) {
  */
 void Render::useShaders(int isContour) {
     if (isContour) {
-        glDepthFunc(GL_ALWAYS);
         glUseProgram(programID1);
         glUniformMatrix4fv(mvpID1, 1, GL_FALSE, &controller->getMVP()[0][0]);
         glUniformMatrix4fv(mID1, 1, GL_FALSE, &controller->getM()[0][0]);
         glUniformMatrix4fv(vID1, 1, GL_FALSE, &controller->getV()[0][0]);
     } else {
-        glDepthFunc(GL_LESS);
         glUseProgram(programID0);
         glUniformMatrix4fv(mvpID0, 1, GL_FALSE, &controller->getMVP()[0][0]);
         glUniformMatrix4fv(mID0, 1, GL_FALSE, &controller->getM()[0][0]);
@@ -168,9 +166,6 @@ void Render::paint() {
 void Render::start(){
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDepthFunc(GL_LESS);
 
 	glGenVertexArrays(1, &vertexArrayID);
 	glBindVertexArray(vertexArrayID);

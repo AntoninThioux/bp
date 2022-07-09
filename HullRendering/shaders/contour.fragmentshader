@@ -4,9 +4,13 @@ in vec3 vertColor;
 in vec3 normal_cameraspace;
 in vec3 eyeDirection_cameraspace;
 
-out vec4 color;
+out vec3 color;
 
 void main() {
     float theta = dot(normal_cameraspace, eyeDirection_cameraspace);
-    color = vec4(vertColor, (theta < 0.3 && theta > -0.3));
+    if (theta < 0.3 && theta > -0.3) {
+        color = vertColor;
+    } else {
+        discard;    
+    }
 }
