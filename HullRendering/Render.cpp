@@ -3,7 +3,7 @@
  * @author Antonin Thioux (antonin.thioux@gmail.com)
  * @brief This file contains the logic for rendering the Spatio-Temporal hulls.
  * @note A lot of the code is based of OpenGL 3.3 tutorial (https://www.opengl-tutorial.org/) which is WTFPL. 
- * @date last modified at 2022-06-02
+ * @date last modified at 2022-07-09
  * @version 1.0
  */
 
